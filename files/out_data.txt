@@ -1,0 +1,10 @@
+CarNum: 1 Year: 2020 Make: ford Category: truck Miles: 21 Cost: $50000
+CarNum: 2 Year: 2020 Make: ford Category: suv Miles: 7 Cost: $48000
+CarNum: 3 Year: 2020 Make: ford Category: hybrid Miles: 23 Cost: $32000
+CarNum: 4 Year: 2020 Make: ford Category: sedan Miles: 40 Cost: $23000
+CarNum: 5 Year: 2008 Make: honda Category: sedan Miles: 90327 Cost: $12999
+CarNum: 6 Year: 2014 Make: chevy Category: truck Miles: 132870 Cost: $16000
+CarNum: 7 Year: 2019 Make: kia Category: hybrid Miles: 56000 Cost: $9999
+CarNum: 8 Year: 1976 Make: chevy Category: sedan Miles: 75323 Cost: $68000
+CarNum: 9 Year: 1932 Make: ford Category: truck Miles: 85000 Cost: $132000
+CarNum: 10 Year: 2016 Make: toyota Category: suv Miles: 45234 Cost: $32000
