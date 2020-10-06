@@ -5,33 +5,38 @@
 
 static car *db[MAX_CARS];
 static int num_cars = 0;
-int input();
+//int input();
 
 int initialize_db(char *filename) {  
 
+    //printf("%s", filename);
+
     FILE *fin  = fopen(filename,  "r"); 
 
-    int i = 0;
+    int num_cars;
     
     if (fin == NULL) {
        printf("===============\nFile​​ not found!\n===============\n");
        return -1;
 
     } else {
+        int i = 0;
+
         while (fscanf(fin,"%d %d %s %s %d %d", 
-                        &db[i]->carnum,
-                        &db[i]->year, 
+                        db[i]->carnum,
+                        db[i]->year, 
                         db[i]->make, 
                         db[i]->category, 
-                        &db[i]->miles, 
-                        &db[i]->cost) 
+                        db[i]->miles, 
+                        db[i]->cost
+                        ) 
                 != EOF) {
                 i++;
         }
+        num_cars = i;
     }
 
-    num_cars = i;
-    fclose(fin);  
+    fclose(fin); 
     return 1;
 }
 
@@ -140,3 +145,9 @@ car *update_miles(int carnum, int miles) {
     } 
 
 }
+
+// int get_year(car **cars, int year) { 
+
+
+
+// }

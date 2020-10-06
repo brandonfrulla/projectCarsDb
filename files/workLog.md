@@ -21,11 +21,16 @@ Oct 2 2020 - Worked from 11:00 - 13:00, 15:30 - 17:30
     at separate times. 
     > Built print functionality of the UI
     > Implemented FileNotFoundException "Try/catch"
-Oct 4 2020 - Worked from 11:30 - 18:45
+Oct 4 2020 - Worked from 11:30 - 18:00
     > Added car.c
     > Implemented menu for respective user types
-    > Built out remaining methods from car.h file
-
+    > Built out 8 methods from car.h file
+Oct 5 2020 - Worked from 12:30 - 18:00 
+    > Worked out compilation bugs and segmentation faults
+    > This day was a massive time drain, absolutely brutal drudgery
+Oct 6 2020 - Worked from 15:00 - 20:00
+    > Cleared up the last of the segmentation faults/errors
+    > Implemented final methods
 
 Honor Pledge:
      

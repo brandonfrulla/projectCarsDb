@@ -3,6 +3,12 @@
 # include <string.h>
 # include "car.h"
 
+int input() {
+    int inputt;
+    scanf("%d", &inputt);
+    return inputt;
+}
+
 void printSignIn() {
     printf("\nWelcome to the CPSC 305 Project Cars DB- please sign in.\nEnter a user type: ");
 }
@@ -67,7 +73,8 @@ int runProgram(int user, int choice) {
                 break;
             } 
             case 6: {
-                write_db('out_data.txt');
+                char *out_file = "out_data.txt";
+                write_db(out_file);
                 break;
             } 
             case 7: {
@@ -114,17 +121,16 @@ int runProgram(int user, int choice) {
 
 int main(int argc, char **argv) {
 
-    char *filename = argv[0];
+
+    char *filename = argv[1];
     initialize_db(filename);
 
-    // scanFile(filename);
-
-    int user = validateUser();
+    /*int user = validateUser();
 
     int choice = printMenu(user);
 	
     int outNum = runProgram(user, choice);
 
-    return outNum;
+    return outNum;*/
 }
 
