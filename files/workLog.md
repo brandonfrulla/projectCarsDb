@@ -28,9 +28,18 @@ Oct 4 2020 - Worked from 11:30 - 18:00
 Oct 5 2020 - Worked from 12:30 - 18:00 
     > Worked out compilation bugs and segmentation faults
     > This day was a massive time drain, absolutely brutal drudgery
-Oct 6 2020 - Worked from 15:00 - 20:00
+Oct 6 2020 - Worked from 15:00 - 21:00
     > Cleared up the last of the segmentation faults/errors
-    > Implemented final methods
+    > Implemented final methods for owner/ worked through compilation issues 
+oct 7 2020 - 9:00 - 12:30
+    > Added method calls to menu spots in switch statements
+    > finished getCar & addcar methods
+Oct 9 2020 - 13:00 - 17:00, 18:30 - 20:30
+    > implemented find car into multiple other methods, as well as print car to improve performance 
+    and remove redundant code 
+    > implemented delete car function for in a way for purchase car function to also be able to use it
+    > implemented getYears and some other stuff
+    > had to stop to maintain sanity
 
 Honor Pledge:
      

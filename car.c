@@ -3,17 +3,12 @@
 # include <string.h>
 # include "car.h"
 
-static car *db[MAX_CARS];
+static car db[MAX_CARS];
 static int num_cars = 0;
-//int input();
 
 int initialize_db(char *filename) {  
 
-    //printf("%s", filename);
-
     FILE *fin  = fopen(filename,  "r"); 
-
-    int num_cars;
     
     if (fin == NULL) {
        printf("===============\nFile​​ not found!\n===============\n");
@@ -21,20 +16,23 @@ int initialize_db(char *filename) {
 
     } else {
         int i = 0;
-
-        while (fscanf(fin,"%d %d %s %s %d %d", 
-                        db[i]->carnum,
-                        db[i]->year, 
-                        db[i]->make, 
-                        db[i]->category, 
-                        db[i]->miles, 
-                        db[i]->cost
+        while (fscanf(fin,"%d %d %s %s %d %d",
+                        &db[i].carnum,
+                        &db[i].year, 
+                        db[i].make, 
+                        db[i].category, 
+                        &db[i].miles, 
+                        &db[i].cost
                         ) 
                 != EOF) {
                 i++;
         }
         num_cars = i;
     }
+
+    printf("\n=================================================================\n"); 
+    printf("DB loaded successfully!");
+    printf("\n=================================================================\n"); 
 
     fclose(fin); 
     return 1;
@@ -53,9 +51,9 @@ int write_db(char *filemame) {
 
         for (int c = 0; c < num_cars; c++) {
 
-            car *out = db[c];
+            car *out = &db[c];
 
-            fprintf(fout,  "CarNum: %d Year: %d Make: %s Category: %s Miles: %d Cost: $%.2d\n", 
+            fprintf(fout,  "CarNum: %d Year: %d Make: %s Category: %s Miles: %d Cost: $%.2d\n",
                 out->carnum, 
                 out->year, 
                 out->make, 
@@ -73,6 +71,18 @@ int write_db(char *filemame) {
     }
 }
 
+void showMatches(car **cars, int num_matches) {
+    
+    printf("\n=================================================================\n"); 
+    for (int counter = 0; counter < num_matches; counter++) {
+
+        car *c = cars[counter];
+        print_car(c);
+
+    } 
+    printf("=================================================================\n\n"); 
+
+}
 
 
 void show_cars() {
@@ -80,7 +90,7 @@ void show_cars() {
     printf("\n=================================================================\n"); 
     for (int counter = 0; counter < num_cars; counter++) {
 
-        car *c = db[counter];
+        car *c = &db[counter];
         print_car(c);
 
     } 
@@ -98,56 +108,87 @@ void print_car(car *c) {
 
 car *find_car(int carnum) {
     
-    printf("\n=================================================================\n"); 
     for (int counter = 0; counter < num_cars; counter++) {
         
-        car *c = db[counter];
+        car *c = &db[counter];
         if (c->carnum == carnum) {
             return c;
         }
-    } 
-    printf("=================================================================\n\n"); 
+    }
+    return NULL; 
 
 }
 
-car *add_car(int carnum, int year, category category, int miles, int cost) {
-    db[num_cars]->carnum;
-    db[num_cars]->year;
-    db[num_cars]->category;
-    db[num_cars]->miles;
-    db[num_cars]->cost;
+car *add_car(int carnum, int year, char *make, char *category, int miles, int cost) {
+    
+    car carro;
+    
+    carro.carnum = carnum;
+    carro.year = year;
+    strcpy(carro.make, make);
+    strcpy(carro.category, category);
+    carro.miles = miles;
+    carro.cost = cost;
+    
+    db[num_cars] = carro;
+    car * point  = &db[num_cars];
     num_cars++;
+
+    return point;
 }
 
 
-//revise, don't know when to return the car really, or what to do if it doesn't fins anything 
 car *update_cost(int carnum, int cost) {
-    for (int counter = 0; counter < num_cars; counter++) {
-        
-        car *c = db[counter];
-        if (c->carnum == carnum) {
-            db[counter]->cost = cost;
-            return c;
-        }
-    } 
+    car *exists = find_car(carnum);
+    exists->cost = cost;
+    return exists;
 }
 
-//revise, don't know when to return the car really, or what to do if it doesn't fins anything 
 car *update_miles(int carnum, int miles) {
+    car *exists = find_car(carnum);
+    exists->miles = miles;
+    return exists;
+} 
 
+int get_year(car **cars, int year) { 
+    int found = 0;
     for (int counter = 0; counter < num_cars; counter++) {
-        
-        car *c = db[counter];
-        if (c->carnum == carnum) {
-            db[counter]->miles = miles;
-            return c;
+        car *c = &db[counter];
+        if (c->year >= year) {
+            cars[found] = c;
+            found++;
         }
-    } 
-
+    }
+    return found;
+    
 }
 
-// int get_year(car **cars, int year) { 
+void deleteCar(int carnum) {
+    for (int counter = 0; counter < num_cars; counter++) {
+        int bigbreak = 0;
+        car *c = &db[counter];
+        if (c->carnum == carnum) {
+            printf("Deleting: ");
+            print_car(c);
+            num_cars--;
+            for (int d = counter; d < num_cars; d++) {
+                 db[d] = db[d+1];
+                 if (d == num_cars) {
+                    bigbreak = 1;
+                    break;
+                 }
+            }
+        }
+        if (bigbreak) {
+            break;
+        }
+    }
+}
 
-
-
-// }
+car *purchase(int carnum) {
+    car *toBuy = find_car(carnum);
+    if (toBuy != NULL) {
+        deleteCar(toBuy->carnum);
+    }
+    return toBuy;
+}

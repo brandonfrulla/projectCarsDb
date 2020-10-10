@@ -17,10 +17,14 @@ int write_db(char *filename);    //done
 void show_cars();                  //done
 void print_car(car *c);          //done
 car *find_car(int carnum);        // done
-car *add_car(int carnum, int year, category category, int miles, int cost); //done
+car *add_car(int carnum, int year, char *make, char *category, int miles, int cost); //done
 car *update_cost(int carnum, int cost); //done
 car *update_miles(int carnum, int miles); //done
-int get_year(car **cars, int year); //
+int get_year(car **cars, int year);
 int get_cost(car **cars, int cost);
 int get_category(car **cars, category c);
 car *purchase(int carnum);
+
+//methods added by me
+void deleteCar(int carnum);
+void showMatches(car **cars, int num_matches);

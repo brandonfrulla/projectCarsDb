@@ -13,6 +13,32 @@ void printSignIn() {
     printf("\nWelcome to the CPSC 305 Project Cars DB- please sign in.\nEnter a user type: ");
 }
 
+void addCar() {
+
+    printf("\nEnter a carnum: ");
+    int carnum = input();
+    car *exists = find_car(carnum);
+    if (exists ==NULL) {
+        printf("Enter a year: ");
+        int year = input();
+        printf("Enter a make: ");
+        char maker[24];
+        scanf("%s", maker);
+        printf("Enter a category: ");
+        char category[24];
+        scanf("%s", category);
+        printf("Enter miles: ");
+        int mileage = input();
+        printf("Enter cost: ");
+        int price = input();
+        car *newCar = add_car(carnum, year, maker, category, mileage, price);
+        printf("Car added:\n");
+        print_car(newCar);
+    } else {
+        printf("That carnum is already in use!\n");
+    }
+}
+
 int validateUser() {
     printSignIn();
 
@@ -48,74 +74,149 @@ int printMenu(int user) {
     return input();
 }
 
-int runProgram(int user, int choice) {
-    if (user == 1) {
-        switch (choice) {
-        	case 1: {
-        		printf("\nCars currently held in DB:");
-                show_cars();
-        		break;
-         	}
-    	    case 2: {
-    	    	printf("add car to be implemented...\n");
-    	    	break;
-    	    }
-    	    case 3: {
-    	        printf("delete car to be implemented...\n");
-                break;
-    	    }
-            case 4: {
-                printf("update cost to be implemented...\n");
-                break;
-            } 
-            case 5: {
-                printf("update miles to be implemented...\n");
-                break;
-            } 
-            case 6: {
-                char *out_file = "out_data.txt";
-                write_db(out_file);
-                break;
-            } 
-            case 7: {
-                printf("\nExiting...\n");
-                exit(1);
-            }
-	        default:
-		        printf("Invalid command!\n");
-	    }
+void updateCarCost() {
+    printf("\nEnter a carnum: ");
+    int carnum = input();
+    car *exists = find_car(carnum);
+    if (exists != NULL) {
+        printf("Enter the new cost: ");
+        int cost = input();
+        car *newCost = update_cost(carnum, cost);
+        printf("Car updated:\n");
+        print_car(newCost);
     } else {
-        switch (choice) {
-        	case 1: {
-        		printf("show car by year to be implemented");
-        		break;
-         	}
-    	    case 2: {
-    	    	printf("show car by make to be implemented...\n");
-    	    	break;
-    	    }
-    	    case 3: {
-    	        printf("show car by cost to be implemented...\n");
-                break;
-    	    }
-            case 4: {
-                printf("show car by category to be implemented...\n");
-                break;
-            } 
-            case 5: {
-                printf("purchase car by carnum to be implemented...\n");
-                break;
-            } 
-            case 6: {
-                printf("\nExiting...\n");
-                exit(1);
-            }
-	        default:
-		        printf("Invalid command!\n");
-	    }
-
+        printf("That carnum isn't in the database!\n");
     }
-    return 1;
+   
+}
+
+void updateCarMiles() {
+    printf("\nEnter a carnum: ");
+    int carnum = input();
+    car *exists = find_car(carnum);
+    if (exists != NULL) {
+        printf("Enter the new mileage: ");
+        int miles = input();
+        car *newMiles = update_miles(carnum, miles);
+        printf("Car updated:\n");
+        print_car(newMiles);
+    } else {
+        printf("That carnum isn't in the database!\n");
+    }
+   
+}
+
+void deleteCarPrompt() {
+    printf("\nEnter a carnum: ");
+    int carnum = input();
+    car *exists = find_car(carnum);
+    if (exists != NULL) {
+        deleteCar(exists->carnum);
+    } else {
+        printf("That carnum isn't in the database!\n");
+    }
+   
+}
+
+void purchaseCarPrompt() {
+    printf("\nEnter a carnum: ");
+    int carnum = input();
+    car *exists = find_car(carnum);
+    if (exists != NULL) {
+        purchase(exists->carnum);
+        printf("Congratulations on the purhcase!\n");
+    } else {
+        printf("That carnum isn't in the database!\n");
+    }
+}
+
+void getYearsPrompt() {
+   car **matchingYears[MAX_CARS];
+   printf("Enter a year: ");
+   int year = input();
+   int numMatches = get_year(*matchingYears, year);
+   showMatches(*matchingYears, numMatches);
+}
+
+int runProgram(int user) {
+    int choice;
+
+    do {
+        
+        choice = printMenu(user);
+
+        if (user == 1) {
+            switch (choice) {
+                case 1: {
+                    printf("\nCars currently held in DB:");
+                    show_cars();
+                    break;
+                }
+                case 2: {
+                    addCar();
+                    break;
+                }
+                case 3: {
+                    deleteCarPrompt();
+                    break;
+                }
+                case 4: {
+                    updateCarCost();
+                    break;
+                } 
+                case 5: {
+                    updateCarMiles();
+                    break;
+                } 
+                case 6: {
+                    char *out_file = "out_data.txt";
+                    write_db(out_file);
+                    break;
+                } 
+                case 7: {
+                    printf("\nExiting...\n");
+                    exit(1);
+                }
+                default:
+                    printf("Invalid command!\n");
+                    break;
+            }
+        } else {
+            switch (choice) {
+                case 1: {
+                    getYearsPrompt();
+                    break;
+                }
+                case 2: {
+                    printf("show car by make to be implemented...\n");
+                    break;
+                }
+                case 3: {
+                    printf("show car by cost to be implemented...\n");
+                    break;
+                }
+                case 4: {
+                    printf("show car by category to be implemented...\n");
+                    break;
+                } 
+                case 5: {
+                    purchaseCarPrompt();
+                    break;
+                } 
+                case 6: {
+                    printf("\nExiting...\n");
+                    exit(1);
+                }
+                default:
+                    printf("Invalid command!\n");
+                    break;
+            }
+
+        }
+
+    } while (!(choice == 7 && user == 1) || !(choice == 6 && user == 2));
+
+    return 0;
 }
 
 
@@ -125,12 +226,10 @@ int main(int argc, char **argv) {
     char *filename = argv[1];
     initialize_db(filename);
 
-    /*int user = validateUser();
+    int user = validateUser();
 
-    int choice = printMenu(user);
-	
-    int outNum = runProgram(user, choice);
-
-    return outNum;*/
+    int returnVal = runProgram(user);
+    
+    return returnVal;
 }
 
