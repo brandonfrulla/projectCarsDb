@@ -297,14 +297,17 @@ int runProgram(int user) {
 
 int main(int argc, char **argv) {
 
-
     char *filename = argv[1];
-    initialize_db(filename);
+    int foundFile = initialize_db(filename);
+    int returnVal;
 
-    int user = validateUser();
+    if (foundFile == 1) {
+        int user = validateUser();
+        returnVal = runProgram(user);
+    } else {
+        returnVal = foundFile;
+    }
 
-    int returnVal = runProgram(user);
-    
     return returnVal;
 }
 
