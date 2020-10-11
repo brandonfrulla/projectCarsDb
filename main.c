@@ -130,12 +130,71 @@ void purchaseCarPrompt() {
     }
 }
 
-void getYearsPrompt() {
-   car **matchingYears[MAX_CARS];
-   printf("Enter a year: ");
-   int year = input();
-   int numMatches = get_year(*matchingYears, year);
-   showMatches(*matchingYears, numMatches);
+void getNumPrompt(int yearOrCost) {
+    car *matches[MAX_CARS];
+    int yrOrCst;
+
+    if (yearOrCost == 0) { 
+        printf("Enter a year: ");
+        yrOrCst = input();
+    } else {
+        printf("Enter a cost: ");
+        yrOrCst = input();
+    }
+    printf("\n");
+   
+    int numMatches;
+    if (yearOrCost == 0) {
+        numMatches = get_year(matches, yrOrCst);
+    } else {
+        numMatches = get_cost(matches, yrOrCst);    
+    }
+
+    if (numMatches >= 1) {
+        for (int counter = 0; counter < numMatches; counter++) {
+            car *c = matches[counter];
+            print_car(c);
+        }
+    } else {
+        if (yearOrCost == 0) {
+            printf("No car that year or newer is in the Database!\n");
+        } else {
+            printf("No car that price or cheaper is in the Database!\n");
+        }
+    }
+}
+
+void getPrompt(int makeOrCat) {
+    car *matches[MAX_CARS];
+    char searchVal[25];
+    
+    if (makeOrCat == 0) {
+        printf("Enter a make: ");
+    } else { 
+        printf("Enter a category: ");
+    }
+    scanf("%s", searchVal);
+    printf("\n");
+    
+    int numMatches;
+    if (makeOrCat == 0) {
+        numMatches = get_make(matches, searchVal);
+    } else {
+        numMatches = get_category(matches, searchVal);
+    }
+        
+    if (numMatches >= 1) {
+        for (int counter = 0; counter < numMatches; counter++) {
+            car *c = matches[counter];
+            print_car(c);
+        }
+    } else {
+        if (makeOrCat) {
+            printf("No car that of that make in the Database!\n");
+        } else {
+            printf("No car that of that category in the Database!\n");
+        }
+    }
 }
 
 int runProgram(int user) {
@@ -184,19 +243,19 @@ int runProgram(int user) {
         } else {
             switch (choice) {
                 case 1: {
-                    getYearsPrompt();
+                    getNumPrompt(0);
                     break;
                 }
                 case 2: {
-                    printf("show car by make to be implemented...\n");
+                    getPrompt(0);
                     break;
                 }
                 case 3: {
-                    printf("show car by cost to be implemented...\n");
+                    getNumPrompt(1);
                     break;
                 }
                 case 4: {
-                    printf("show car by category to be implemented...\n");
+                    getPrompt(1);
                     break;
                 } 
                 case 5: {

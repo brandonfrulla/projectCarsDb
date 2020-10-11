@@ -71,20 +71,6 @@ int write_db(char *filemame) {
     }
 }
 
-void showMatches(car **cars, int num_matches) {
-    
-    printf("\n=================================================================\n"); 
-    for (int counter = 0; counter < num_matches; counter++) {
-
-        car *c = cars[counter];
-        print_car(c);
-
-    } 
-    printf("=================================================================\n\n"); 
-
-}
-
-
 void show_cars() {
     
     printf("\n=================================================================\n"); 
@@ -150,9 +136,11 @@ car *update_miles(int carnum, int miles) {
     return exists;
 } 
 
-int get_year(car **cars, int year) { 
+int get_year(car **cars, int year) {    
     int found = 0;
+
     for (int counter = 0; counter < num_cars; counter++) {
+
         car *c = &db[counter];
         if (c->year >= year) {
             cars[found] = c;
@@ -160,7 +148,48 @@ int get_year(car **cars, int year) {
         }
     }
     return found;
-    
+}
+
+int get_cost(car **cars, int cost) {    
+    int found = 0;
+
+    for (int counter = 0; counter < num_cars; counter++) {
+
+        car *c = &db[counter];
+        if (c->cost <= cost) {
+            cars[found] = c;
+            found++;
+        }
+    }
+    return found;
+}
+
+int get_make(car **cars, char *make) {    
+    int found = 0;
+
+    for (int counter = 0; counter < num_cars; counter++) {
+
+        car *c = &db[counter];
+        if (strcmp(c->make, make) == 0) {
+            cars[found] = c;
+            found++;
+        }
+    }
+    return found;
+}
+
+int get_category(car **cars, char *category) {    
+    int found = 0;
+
+    for (int counter = 0; counter < num_cars; counter++) {
+
+        car *c = &db[counter];
+        if (strcmp(c->category, category) == 0) {
+            cars[found] = c;
+            found++;
+        }
+    }
+    return found;
 }
 
 void deleteCar(int carnum) {

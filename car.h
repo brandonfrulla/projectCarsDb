@@ -7,7 +7,7 @@ typedef struct {
    int   carnum;
    int   year;
    char  make[MAX_MAKE_CHARS];
-   char category[25];
+   char  category[25];
    int   miles;
    int   cost;
 } car;  
@@ -20,11 +20,11 @@ car *find_car(int carnum);        // done
 car *add_car(int carnum, int year, char *make, char *category, int miles, int cost); //done
 car *update_cost(int carnum, int cost); //done
 car *update_miles(int carnum, int miles); //done
-int get_year(car **cars, int year);
-int get_cost(car **cars, int cost);
-int get_category(car **cars, category c);
-car *purchase(int carnum);
+int get_year(car **cars, int year); //done
+int get_cost(car **cars, int cost); //done
+int get_category(car **cars, char *category); //done
+car *purchase(int carnum); //done
 
 //methods added by me
-void deleteCar(int carnum);
-void showMatches(car **cars, int num_matches);
+void deleteCar(int carnum); //done
+int get_make(car **cars, char *make); //done
