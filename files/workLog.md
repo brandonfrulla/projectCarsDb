@@ -47,7 +47,7 @@ Oct 10 2020 - 14:30 - 21:00
 Oct 11 2020 - 0620 - 11:30
     > Made sure implementation matched with specifications of the project
     > developed Makefile
-    
+    > cleaned up code in general, edge tests
 
 Honor Pledge:
      
