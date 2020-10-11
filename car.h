@@ -1,8 +1,6 @@
 #define MAX_CARS 100
 #define MAX_MAKE_CHARS 32
 
-//typedef enum { sedan, suv, truck, hybrid } category;
-
 typedef struct {
    int   carnum;
    int   year;

@@ -46,6 +46,9 @@ Oct 10 2020 - 14:30 - 21:00
     > made sure everything worked as it should
 Oct 11 2020 - 0620 - 11:30
     > Made sure implementation matched with specifications of the project
+    > developed Makefile
+    
+
 Honor Pledge:
      
 “I hereby declare upon my word of honor that I have neither given nor received 

@@ -62,12 +62,14 @@ int printMenu(int user) {
         printf("[1] Print Cars in DB           [2] Add a new Car\n");
         printf("[3] Delete via carnum          [4] Update cost via carnum\n");
         printf("[5] Update miles via carnum    [6] Save DB to file\n");
-        printf("[7] Quit program\nEnter your choice: "); 
+        printf("[7] Show cars by year          [8] Show cars by make\n");
+        printf("[9] Show cars by cost          [10] Show cars by category\n");
+        printf("[11] Quit program\nEnter your choice: "); 
     } else {
         printf("\nSelect one of the following:\n");
         printf("[1] Show cars by year          [2] Show cars by make\n");
         printf("[3] Show cars by cost          [4] Show cars by category\n");
-        printf("[5] Purchase car by carnum     [6] Quit program\n");
+        printf("[5] Purchase car by carnum\n");
         printf("Enter your choice: "); 
     }
 
@@ -124,7 +126,7 @@ void purchaseCarPrompt() {
     car *exists = find_car(carnum);
     if (exists != NULL) {
         purchase(exists->carnum);
-        printf("Congratulations on the purhcase!\n");
+        printf("\nCongratulations on the purhcase!\n");
     } else {
         printf("That carnum isn't in the database!\n");
     }
@@ -231,8 +233,24 @@ int runProgram(int user) {
                     char *out_file = "out_data.txt";
                     write_db(out_file);
                     break;
-                } 
+                }
                 case 7: {
+                    getNumPrompt(0);
+                    break;
+                }
+                case 8: {
+                    getPrompt(0);
+                    break;
+                }
+                case 9: {
+                    getNumPrompt(1);
+                    break;
+                }
+                case 10: {
+                    getPrompt(1);
+                    break;
+                }  
+                case 11: {
                     printf("\nExiting...\n");
                     exit(1);
                 }
@@ -260,12 +278,10 @@ int runProgram(int user) {
                 } 
                 case 5: {
                     purchaseCarPrompt();
-                    break;
-                } 
-                case 6: {
-                    printf("\nExiting...\n");
+                    char *out_file = "out_data.txt";
+                    write_db(out_file);
                     exit(1);
-                }
+                } 
                 default:
                     printf("Invalid command!\n");
                     break;
