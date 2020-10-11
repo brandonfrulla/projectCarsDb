@@ -1,19 +1,15 @@
 TARGET = cars
 LIBS = -lm5
 CC = gcc
-
 CFLAGS = -g -Wall -std=c11
 
 .PHONY: default all clean
 default: $(TARGET)
-all: default
-OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
-HEADERS = $(wildcard *.h)
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
-.PRECIOUS: $(TARGET) $(OBJECTS)
-$(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -g -Wall $(LIBS) -o $@
+$(TARGET): main.o car.o
+	$(CC) $(CFLAGS) -o $(TARGET) main.o car.o
+main.o: main.c car.h
+	$(CC) $(CFLAGS) -c main.c
+car.o: car.c car.h
+	$(CC) $(CFLAGS) -c car.c
 clean:
-	-rm -f *.o
-	-rm -f $(TARGET)
+	-rm -f *.o $(TARGET)
