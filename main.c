@@ -50,7 +50,7 @@ int validateUser() {
     } else if (strcmp(userIn, "shopper") == 0) {
         return 2;
     } else  {
-        "Invalid user!";
+        printf("\nInvalid user! You entered: %s\n", userIn);
         exit(1);
     }
 }
