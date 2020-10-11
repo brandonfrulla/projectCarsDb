@@ -40,6 +40,11 @@ Oct 9 2020 - 13:00 - 17:00, 18:30 - 20:30
     > implemented delete car function for in a way for purchase car function to also be able to use it
     > implemented getYears and some other stuff
     > had to stop to maintain sanity
+Oct 10 2020 - 14:30 - 21:00
+    > refactored a lot of the code for improved reusability
+    > added the edge case print statements
+    > made sure everything worked as it should
+Oct 11 2020 - 0800 -
 
 Honor Pledge:
      
