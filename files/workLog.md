@@ -48,6 +48,8 @@ Oct 11 2020 - 0620 - 11:30
     > Made sure implementation matched with specifications of the project
     > developed Makefile
     > cleaned up code in general, edge tests
+Oct 17 2020 16:00 - 
+    > implemented eneumerated type and fixed subsequent bugs
 
 Honor Pledge:
      

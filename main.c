@@ -24,14 +24,26 @@ void addCar() {
         printf("Enter a make: ");
         char maker[24];
         scanf("%s", maker);
+
         printf("Enter a category: ");
-        char category[24];
-        scanf("%s", category);
+        category trim;
+        char entry[24];
+        scanf("%s", entry);
+        if (entry == "sedan") {
+            trim = sedan;
+        } else if (entry == "suv") {
+            trim = suv;
+        } else if (entry == "truck") {
+            trim = truck;
+        } else if (entry == "hybrid") {
+            trim = hybrid;
+        }
+        
         printf("Enter miles: ");
         int mileage = input();
         printf("Enter cost: ");
         int price = input();
-        car *newCar = add_car(carnum, year, maker, category, mileage, price);
+        car *newCar = add_car(carnum, year, maker, trim, mileage, price);
         printf("Car added:\n");
         print_car(newCar);
     } else {
@@ -168,21 +180,33 @@ void getNumPrompt(int yearOrCost) {
 
 void getPrompt(int makeOrCat) {
     car *matches[MAX_CARS];
-    char searchVal[25];
-    
+    char makeSearchVal[25];
+    category catSearchVal;
+    char t[24];
+
     if (makeOrCat == 0) {
         printf("Enter a make: ");
+        scanf("%s", makeSearchVal);
     } else { 
         printf("Enter a category: ");
+        scanf("%s", t);
+        if (t == "sedan") {
+            catSearchVal = sedan;
+        } else if (t== "suv") {
+            catSearchVal = suv;
+        } else if (t == "truck") {
+            catSearchVal = truck;
+        } else if (t == "hybrid") {
+            catSearchVal = hybrid;
+        }
     }
-    scanf("%s", searchVal);
     printf("\n");
     
     int numMatches;
     if (makeOrCat == 0) {
-        numMatches = get_make(matches, searchVal);
+        numMatches = get_make(matches, makeSearchVal);
     } else {
-        numMatches = get_category(matches, searchVal);
+        numMatches = get_category(matches, catSearchVal);
     }
         
     if (numMatches >= 1) {
@@ -310,4 +334,3 @@ int main(int argc, char **argv) {
 
     return returnVal;
 }
-
