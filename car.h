@@ -12,20 +12,20 @@ typedef struct {
    int   cost;
 } car;  
 
-int initialize_db(char *filename); //done
-int write_db(char *filename);    //done
-void show_cars();                  //done
-void print_car(car *c);          //done
+int initialize_db(char *filename); 
+int write_db(char *filename);    
+void show_cars();                  
+void print_car(car *c);          
 car *find_car(int carnum);        // done
-car *add_car(int carnum, int year, char *make, category category, int miles, int cost); //done
-car *update_cost(int carnum, int cost); //done
-car *update_miles(int carnum, int miles); //done
-int get_year(car **cars, int year); //done
-int get_cost(car **cars, int cost); //done
-int get_category(car **cars, category category); //done
-car *purchase(int carnum); //done
+car *add_car(int carnum, int year, char *make, category category, int miles, int cost); 
+car *update_cost(int carnum, int cost); 
+car *update_miles(int carnum, int miles); 
+int get_year(car **cars, int year); 
+int get_cost(car **cars, int cost); 
+int get_category(car **cars, category category); 
+car *purchase(int carnum); 
 
 //methods added by me
-void deleteCar(int carnum); //done
-int get_make(car **cars, char *make); //done
+void deleteCar(int carnum); 
+int get_make(car **cars, char *make); 
 char* enumToString(category cat);

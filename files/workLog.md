@@ -51,6 +51,8 @@ Oct 11 2020 - 0620 - 11:30
 Oct 17 2020 16:00 - 17:30
     > implemented eneumerated type and fixed subsequent bugs in car.c
 Oct 18 2020 9:30 - 
+    > continued fixing bugs caused by Categories becoming an enumerated type
+    > tested code against gusty test files and fixed as needed
 
 Honor Pledge:
      

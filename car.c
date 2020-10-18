@@ -7,6 +7,7 @@ static car db[MAX_CARS];
 static int num_cars = 0;
 const char *strings[] = { "sedan", "suv", "truck", "hybrid"};
 
+//reads in data file and handles not found errors as well as formatting the new cars as needed per line
 int initialize_db(char *filename) {  
 
     FILE *fin  = fopen(filename,  "r");
@@ -61,6 +62,7 @@ int initialize_db(char *filename) {
     return 1;
 }
 
+//responsible for writing entirety of DB to an out file
 int write_db(char *filemame) {
 
     FILE *fout = fopen(filemame, "w+");  
@@ -94,6 +96,7 @@ int write_db(char *filemame) {
     }
 }
 
+//primary function used to print each car held in db when called
 void show_cars() {
     
     printf("\n=================================================================\n"); 
@@ -107,6 +110,7 @@ void show_cars() {
 
 }
 
+//helper fucntion for show_cars, prints the formatted lines for each car 
 void print_car(car *c) {
 
         printf("CarNum: %d Year: %d Make: %s ", c->carnum, c->year, c->make);
@@ -115,10 +119,12 @@ void print_car(car *c) {
 
 }
 
+//uses the static var aboce to convert the enum 'indeces' held by the car struct types into actual string values for human consumption
 char* enumToString(category cat) {
     return (char*) strings[cat];
 }
 
+//finds cars in db by carnum, or returns null when car cannot be located
 car *find_car(int carnum) {
     
     for (int counter = 0; counter < num_cars; counter++) {
@@ -132,14 +138,15 @@ car *find_car(int carnum) {
 
 }
 
-car *add_car(int carnum, int year, char *make, char *category, int miles, int cost) {
+//adds cars to db 
+car *add_car(int carnum, int year, char *make, category category, int miles, int cost) {
     
     car carro;
     
     carro.carnum = carnum;
     carro.year = year;
     strcpy(carro.make, make);
-    strcpy(carro.category, category);
+    carro.category = category;
     carro.miles = miles;
     carro.cost = cost;
     
@@ -150,19 +157,21 @@ car *add_car(int carnum, int year, char *make, char *category, int miles, int co
     return point;
 }
 
-
+//updates cars' respective costs in db if they are found
 car *update_cost(int carnum, int cost) {
     car *exists = find_car(carnum);
     exists->cost = cost;
     return exists;
 }
 
+//updates cars' respecive mileages in db if they are found
 car *update_miles(int carnum, int miles) {
     car *exists = find_car(carnum);
     exists->miles = miles;
     return exists;
 } 
 
+//returns an int of matches to calling function and assigns copies of any matches found to the array passed to it calling function 
 int get_year(car **cars, int year) {    
     int found = 0;
 
@@ -177,6 +186,7 @@ int get_year(car **cars, int year) {
     return found;
 }
 
+//returns an int of matches to calling function and assigns copies of any matches found to the array passed to it calling function 
 int get_cost(car **cars, int cost) {    
     int found = 0;
 
@@ -191,6 +201,7 @@ int get_cost(car **cars, int cost) {
     return found;
 }
 
+//returns an int of matches to calling function and assigns copies of any matches found to the array passed to it calling function 
 int get_make(car **cars, char *make) {    
     int found = 0;
 
@@ -205,13 +216,14 @@ int get_make(car **cars, char *make) {
     return found;
 }
 
-int get_category(car **cars, char *category) {    
+//returns an int of matches to calling function and assigns copies of any matches found to the array passed to it calling function 
+int get_category(car **cars, category category) {    
     int found = 0;
 
     for (int counter = 0; counter < num_cars; counter++) {
 
         car *c = &db[counter];
-        if (strcmp(c->category, category) == 0) {
+        if (c->category == category) {
             cars[found] = c;
             found++;
         }
@@ -219,6 +231,8 @@ int get_category(car **cars, char *category) {
     return found;
 }
 
+//used by both owner and shopper, this is responsible for deleting a car from the db. Owner can delete any car they want, 
+//shopper will 'purchase' a car, which essentially just calls this function again but prints a bit of extra congratulatory jargon to the new happy car owner
 void deleteCar(int carnum) {
     for (int counter = 0; counter < num_cars; counter++) {
         int bigbreak = 0;
@@ -241,6 +255,7 @@ void deleteCar(int carnum) {
     }
 }
 
+//like outlined in above comment, simply the delete function for the shopper 
 car *purchase(int carnum) {
     car *toBuy = find_car(carnum);
     if (toBuy != NULL) {
