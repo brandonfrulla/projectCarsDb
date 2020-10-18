@@ -313,7 +313,7 @@ int runProgram(int user) {
 
         }
 
-    } while (!(choice == 7 && user == 1) || !(choice == 6 && user == 2));
+    } while (!(choice == 7 && user == 1) || !(choice == 6 && user == 2)); // look into this I'm pretty sure this is buggy as a b
 
     return 0;
 }
@@ -327,6 +327,7 @@ int main(int argc, char **argv) {
 
     if (foundFile == 1) {
         int user = validateUser();
+        printf("%d\n",user);
         returnVal = runProgram(user);
     } else {
         returnVal = foundFile;

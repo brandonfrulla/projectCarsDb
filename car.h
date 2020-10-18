@@ -28,3 +28,4 @@ car *purchase(int carnum); //done
 //methods added by me
 void deleteCar(int carnum); //done
 int get_make(car **cars, char *make); //done
+char* enumToString(category cat);

@@ -5,10 +5,12 @@
 
 static car db[MAX_CARS];
 static int num_cars = 0;
+const char *strings[] = { "sedan", "suv", "truck", "hybrid"};
 
 int initialize_db(char *filename) {  
 
-    FILE *fin  = fopen(filename,  "r"); 
+    FILE *fin  = fopen(filename,  "r");
+    char str[60]; 
     
     if (fin == NULL) {
        printf("===============\nFile​​ not found!\n===============\n");
@@ -16,15 +18,36 @@ int initialize_db(char *filename) {
 
     } else {
         int i = 0;
-        while (fscanf(fin,"%d %d %s %s %d %d",
-                        &db[i].carnum,
-                        &db[i].year, 
-                        db[i].make, 
-                        db[i].category, 
-                        &db[i].miles, 
-                        &db[i].cost
-                        ) 
-                != EOF) {
+        while (fgets(str, 60, fin) != NULL) {
+                char * split = strtok(str, " ");
+                int innerIndex = 0;
+                while (split != NULL) {
+                    if (innerIndex == 0) {
+                        db[i].carnum = atoi(split);
+                    } else if (innerIndex == 1) {
+                        db[i].year = atoi(split);
+                    } else if (innerIndex == 2) {
+                        strcpy(db[i].make,split);
+                    } else if (innerIndex == 3) {
+                        if (strcmp(split,"sedan") == 0) {
+                            db[i].category = sedan;
+                        } else if (strcmp(split,"suv") == 0) {
+                            db[i].category = suv;
+                        } else if (strcmp(split,"truck")== 0) {
+                            db[i].category = truck;
+                        } else if (strcmp(split,"hybrid") == 0) {
+                            db[i].category = hybrid;
+                        }
+                    } else if (innerIndex == 4) {
+                        db[i].miles = atoi(split);
+                    } else {
+                        db[i].cost = atoi(split);
+                    }
+
+
+                    split = strtok(NULL, " ");
+                    innerIndex++;
+                }
                 i++;
         }
         num_cars = i;
@@ -57,7 +80,7 @@ int write_db(char *filemame) {
                 out->carnum, 
                 out->year, 
                 out->make, 
-                out->category, 
+                enumToString(out->category), 
                 out->miles, 
                 out->cost
                 );    
@@ -84,12 +107,16 @@ void show_cars() {
 
 }
 
-
 void print_car(car *c) {
 
-        printf("CarNum: %d Year: %d Make: %s Category: %s Miles: %d Cost: $%.2d\n", 
-        c->carnum, c->year, c->make, c->category, c->miles, c->cost);
+        printf("CarNum: %d Year: %d Make: %s ", c->carnum, c->year, c->make);
+        printf("Category: %s ", enumToString(c->category)); 
+        printf("Miles: %d Cost: $%.2d\n", c->miles, c->cost);
 
+}
+
+char* enumToString(category cat) {
+    return (char*) strings[cat];
 }
 
 car *find_car(int carnum) {
