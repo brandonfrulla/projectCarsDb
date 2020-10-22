@@ -20,6 +20,7 @@ int initialize_db(char *filename) {
     } else {
         int i = 0;
         while (fgets(str, 60, fin) != NULL) {
+                //printf("%s, %d\n", str, i); //commented out, for gusty debugging 
                 char * split = strtok(str, " ");
                 int innerIndex = 0;
                 while (split != NULL) {

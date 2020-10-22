@@ -16,7 +16,7 @@ int initialize_db(char *filename);
 int write_db(char *filename);    
 void show_cars();                  
 void print_car(car *c);          
-car *find_car(int carnum);        // done
+car *find_car(int carnum);        
 car *add_car(int carnum, int year, char *make, category category, int miles, int cost); 
 car *update_cost(int carnum, int cost); 
 car *update_miles(int carnum, int miles); 
