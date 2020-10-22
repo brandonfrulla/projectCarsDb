@@ -53,8 +53,9 @@ Oct 17 2020 16:00 - 17:30
 Oct 18 2020 9:30 - 14:50 
     > continued fixing bugs caused by Categories becoming an enumerated type
     > tested code against gusty test files and fixed as needed
-Oct 22 2020 14:30 - 15:00
+Oct 22 2020 14:30 - 15:30
     > Met w gusty to demo code and explain test case predicament 
+    > did final tests, added code to github 
 
 Honor Pledge:
      
