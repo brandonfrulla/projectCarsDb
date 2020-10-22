@@ -179,7 +179,7 @@ int get_year(car **cars, int year) {
     for (int counter = 0; counter < num_cars; counter++) {
 
         car *c = &db[counter];
-        if (c->year >= year) {
+        if (c->year > year) {
             cars[found] = c;
             found++;
         }
@@ -194,7 +194,7 @@ int get_cost(car **cars, int cost) {
     for (int counter = 0; counter < num_cars; counter++) {
 
         car *c = &db[counter];
-        if (c->cost <= cost) {
+        if (c->cost < cost) {
             cars[found] = c;
             found++;
         }
